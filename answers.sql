@@ -1,9 +1,18 @@
-SELECT OrderID, CustomerName, TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(Products, ',', n.n), ',', -1)) AS Product
-FROM ProductDetail
-JOIN (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8) n
-ON CHAR_LENGTH(Products) - CHAR_LENGTH(REPLACE(Products, ',', '')) >= n.n - 1;
+-- 1NF
+CREATE TABLE ProductDetail (
+    OrderID INT,
+    CustomerName VARCHAR(100),
+    Products VARCHAR(100)
+);
 
-
+INSERT DATA ProductDetail( OrderID, CustomerName, Products)
+vALUES 
+    (101, 'John Doe','Laptop')
+    (101, 'John Doe', 'Mouse')
+    (102, 'Jane Smith', 'Tablet')
+    (102, 'Jane Smith', 'Keyboard')
+    (102, 'Jane Smith', 'Mouse')
+    (103, 'Emily Clark', 'Phone')
 
 -- Question Two -- 
 CREATE TABLE Orders (
